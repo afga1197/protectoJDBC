@@ -1,0 +1,144 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07/09/2019, 10:17:46 PM
+    Author     : Toshiba
+*/
+
+.colum_{
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+    text-align: center;
+}
+
+#button_select{
+    background-color: #ffffff;
+    outline: none;
+    border: none;
+    display:block;
+}
+
+#second_title{
+    top: -100px;
+    position: relative;
+}
+#thrid_section{
+    position: relative;
+    top: -50px;
+    background: white;
+}
+
+#four_section{
+    position: relative;
+    top: -60px;
+}
+
+#black{
+    color: black;
+}
+
+#natural_section{
+    top: -195px;
+}
+
+#final{
+    top: -240px;
+}
+
+#myCanvas {
+    text-align: center;
+    float:left;
+}
+legend {
+    font-family:Arial;
+    font-size:12px;
+    margin-top:50px;
+    right: 50px;
+}
+#tip {
+    background-color:white;
+    float: left;
+}
+        
+#button_resp{
+    background-color: #009e0f;
+    color: white;
+    border: #009e0f;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#bordes{
+    padding: 0px;
+    border: 0px;
+}
+
+#login_title{
+    background-color: #009e0f; 
+    top: -30px;
+    position: relative;
+}
+
+#main_title{
+    height: 70px;
+}
+
+#big_login{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 200px;
+}
+
+#TextF{
+    width: 330px;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button_green{
+    background-color:#009e0f;
+    color: #ffffff;
+    border: #040505;
+    font-size: 20px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+}
+
+.content-box-yellow,
+.content-box-blue,
+.content-box-green {
+    margin: 0 0 25px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.content-box-blue {
+    background-color: #d8ecf7;
+    border: 1px solid #afcde3;
+}
+
+.content-box-green {
+    background-color: #d9edc2;
+    border: 1px solid #b2ce96;
+}
+
+.content-box-yellow {
+    background-color: #fef5c4;
+    border: 1px solid #fadf98;
+}
+#center_TA{
+    width: 300px;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
