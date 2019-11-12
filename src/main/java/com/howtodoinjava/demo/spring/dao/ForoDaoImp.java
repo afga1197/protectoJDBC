@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ForoDaoImp extends com.howtodoinjava.demo.spring.model.Conexion implements ForoDao {
-
- 
+    
+    @Autowired
     private SessionFactory sessionFactory;
     
-
+    @Autowired
     private UsuarioDao usuarioDao;
     
-
+    @Autowired
     private ResultSet resultado;
     
     public ForoDaoImp(){
@@ -64,18 +64,41 @@ public class ForoDaoImp extends com.howtodoinjava.demo.spring.model.Conexion imp
 
     @Override
     public void modificarComentario(Comentario comentario) {
-//        sessionFactory.getCurrentSession().update(comentario);
+        try {
+            pre = conexion.prepareStatement("UPDATE comentario SET Comentario=? WHERE ID=?");
+            pre.setString(1, comentario.getComentario());
+            pre.setInt(2, comentario.getID());
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminarComentario(int ID) {
-//        Comentario u = (Comentario)sessionFactory.getCurrentSession().get(Comentario.class, ID);
-//        sessionFactory.getCurrentSession().delete(u);
+        try {
+            pre=conexion.prepareStatement("DELETE FROM comentario WHERE ID=?");
+            pre.setLong(1, ID);
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void crearComentario(Comentario comentario) {
-//        sessionFactory.getCurrentSession().save(comentario);    
+        try {
+            pre = conexion.prepareStatement("INSERT INTO comentario (ID, Comentario, Usuario_ID)  VALUES(?,?,?)");
+            pre.setInt(1, comentario.getID());
+            pre.setString(2, comentario.getComentario());
+            pre.setString(3, comentario.getUsuario_ID());
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

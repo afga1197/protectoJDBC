@@ -1,6 +1,5 @@
 package com.howtodoinjava.demo.spring.dao;
 
-import com.howtodoinjava.demo.spring.model.Modulo;
 import com.howtodoinjava.demo.spring.model.Seccion;
 import com.mysql.cj.xdevapi.SessionFactory;
 import java.sql.ResultSet;
@@ -43,7 +42,17 @@ public class ModelSeccionDaoImp extends com.howtodoinjava.demo.spring.model.Cone
 
     @Override
     public void modificarSeccion(Seccion seccion) {
-//        sessionFactory.getCurrentSession().update(seccion);
+        try {
+            pre = conexion.prepareStatement("UPDATE seccion SET Nombre=?, Titulo=?, Numero=? WHERE ID=?");
+            pre.setString(1, seccion.getNombre());
+            pre.setString(2, seccion.getTitulo());
+            pre.setString(3, seccion.getNumero());
+            pre.setInt(4, seccion.getID());
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ModelSeccionDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

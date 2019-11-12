@@ -29,12 +29,25 @@ public class UsuarioDaoImp extends com.howtodoinjava.demo.spring.model.Conexion 
     public UsuarioDaoImp() {
         Conectar();
     }
-   
+
     @Override
     public void guardar(Usuario user) {
-//        user.setPassword(encoder.encode(user.getPassword()));
-//        user.setRole("COMUN");
-//        sessionFactory.getCurrentSession().save(user);
+        try {
+            user.setPassword(encoder.encode(user.getPassword()));
+            user.setRole("COMUN");
+            pre = conexion.prepareStatement("INSERT INTO usuario (ID, User, Email, Password, Web_ID, Role)  VALUES(?,?,?,?,?,?)");
+            pre.setInt(1, user.getId());
+            pre.setString(2, user.getUser());
+            pre.setString(3, user.getEmail());
+            pre.setString(4, user.getPassword());
+            pre.setString(5, user.getWeb_ID());
+            pre.setString(6, user.getRole());
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
@@ -55,14 +68,31 @@ public class UsuarioDaoImp extends com.howtodoinjava.demo.spring.model.Conexion 
 
     @Override
     public void modificar(Usuario user) {
-//        user.setPassword(encoder.encode(user.getPassword()));
-//        sessionFactory.getCurrentSession().update(user);
+        try {
+            user.setPassword(encoder.encode(user.getPassword()));
+            pre = conexion.prepareStatement("UPDATE Usuario SET User=?, Email=?, Password=? WHERE ID=?");
+            pre.setString(1, user.getUser());
+            pre.setString(2, user.getEmail());
+            pre.setString(3, user.getPassword());
+            pre.setInt(4, user.getId());
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void eliminar(int id) {
-//        Usuario u = (Usuario)sessionFactory.getCurrentSession().get(Usuario.class, id);
-//        sessionFactory.getCurrentSession().delete(u);
+        try {
+            pre=conexion.prepareStatement("DELETE FROM Usuario WHERE ID=?");
+            pre.setLong(1, id);
+            pre.executeUpdate();
+            pre.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override

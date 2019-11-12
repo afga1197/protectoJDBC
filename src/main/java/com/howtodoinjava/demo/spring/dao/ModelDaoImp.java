@@ -42,7 +42,15 @@ public class ModelDaoImp extends com.howtodoinjava.demo.spring.model.Conexion im
 
     @Override
     public void modificarModulo(Modulo modulo) {
-//        sessionFactory.getCurrentSession().update(modulo);
+       try {
+           pre = conexion.prepareStatement("UPDATE Modulo SET Nombre=? WHERE ID=?");
+           pre.setString(1, modulo.getNombre());
+           pre.setInt(5, modulo.getID());
+           pre.executeUpdate();
+           pre.close();
+       } catch (SQLException ex) {
+           Logger.getLogger(ModelDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
 }
