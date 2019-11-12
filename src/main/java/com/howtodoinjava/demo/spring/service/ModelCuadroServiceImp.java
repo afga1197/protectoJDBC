@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ModelCuadroServiceImp implements ModelCuadroService{
     
-    @Autowired
+    
     private ModelCuadroDao modelCuadroDao;
 
     @Transactional

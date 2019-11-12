@@ -24,10 +24,10 @@ public class ContenManagementController {
         
     private String num="";
         
-    @Autowired
+    
     private ModelCuadroService modelCuadroService;
     
-    @Autowired
+    
     private ModelSeccionService modelSeccionService;
        
     @RequestMapping(value = "/contenManagement", method = RequestMethod.GET)

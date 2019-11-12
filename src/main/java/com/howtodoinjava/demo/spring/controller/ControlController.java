@@ -22,10 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ControlController  {
     
-    @Autowired
+    
     private UsuarioService userService;
     
-    @Autowired
+    
     private ForoService foroService;
        
     @RequestMapping(value = "/control", method = RequestMethod.GET)

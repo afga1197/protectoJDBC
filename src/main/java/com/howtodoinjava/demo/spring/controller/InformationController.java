@@ -23,17 +23,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class InformationController {
     
-    @Autowired
+   
     private UsuarioService usuarioService;
     
     
-    @Autowired
+    
     private ModelService modelService;
     
-    @Autowired
+    
     private ModelCuadroService modelCuadroService;
     
-    @Autowired
+    
     private ModelSeccionService modelSeccionService;
     
     @RequestMapping(value = "/naturalDisasters", method = RequestMethod.GET)

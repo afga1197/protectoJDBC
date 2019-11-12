@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
       
-    @Autowired
+    
     private UsuarioService userService;
     
     @RequestMapping(value = "/loginAction", method = RequestMethod.GET)
@@ -38,7 +38,7 @@ public class LoginController {
     
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String error(Locale locale, Model model) {
-        model.addAttribute("ERROR_MESSAGE","Usuario o contraseña incorrectos");
+        model.addAttribute("ERROR_MESSAGE","Usuario o contraseï¿½a incorrectos");
         return "login";
     }
             

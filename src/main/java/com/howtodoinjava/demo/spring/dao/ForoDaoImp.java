@@ -15,13 +15,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ForoDaoImp extends com.howtodoinjava.demo.spring.model.Conexion implements ForoDao {
 
-    @Autowired
+ 
     private SessionFactory sessionFactory;
     
-    @Autowired
+
     private UsuarioDao usuarioDao;
     
-    @Autowired
+
     private ResultSet resultado;
     
     public ForoDaoImp(){
@@ -64,18 +64,18 @@ public class ForoDaoImp extends com.howtodoinjava.demo.spring.model.Conexion imp
 
     @Override
     public void modificarComentario(Comentario comentario) {
-        sessionFactory.getCurrentSession().update(comentario);
+//        sessionFactory.getCurrentSession().update(comentario);
     }
 
     @Override
     public void eliminarComentario(int ID) {
-        Comentario u = (Comentario)sessionFactory.getCurrentSession().get(Comentario.class, ID);
-        sessionFactory.getCurrentSession().delete(u);
+//        Comentario u = (Comentario)sessionFactory.getCurrentSession().get(Comentario.class, ID);
+//        sessionFactory.getCurrentSession().delete(u);
     }
 
     @Override
     public void crearComentario(Comentario comentario) {
-        sessionFactory.getCurrentSession().save(comentario);    
+//        sessionFactory.getCurrentSession().save(comentario);    
     }
 
     @Override

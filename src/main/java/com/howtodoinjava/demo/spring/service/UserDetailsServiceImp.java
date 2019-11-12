@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userDetailsService")
 public class UserDetailsServiceImp implements UserDetailsService{
     
-    @Autowired
+ 
     private UsuarioDao userDetailsDao;
     
     @Transactional(readOnly = true)

@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ForoServiceImp implements ForoService{
 
-    @Autowired
+   
     ForoDao foroDao;
     
     @Transactional

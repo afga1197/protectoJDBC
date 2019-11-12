@@ -11,7 +11,7 @@ import com.howtodoinjava.demo.spring.model.Usuario;
 @Service
 public class UsuarioServiceImp implements UsuarioService {
 
-    @Autowired
+   
     private UsuarioDao userDao;
    
     @Transactional

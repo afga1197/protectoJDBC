@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ConfigSectionController {
         
-    @Autowired
     private ModelSeccionService modelSeccionService;
     
     @ModelAttribute("section")

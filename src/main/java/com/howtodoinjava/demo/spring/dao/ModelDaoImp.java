@@ -1,38 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.howtodoinjava.demo.spring.dao;
 
-import com.howtodoinjava.demo.spring.model.Cuadro_seccion;
 import com.howtodoinjava.demo.spring.model.Modulo;
-import com.howtodoinjava.demo.spring.model.Seccion;
+import com.mysql.cj.xdevapi.SessionFactory;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.TypedQuery;
-import org.hibernate.SessionFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author Toshiba
- */
 @Repository
-public class ModelDaoImp implements ModelDao{
+public class ModelDaoImp extends com.howtodoinjava.demo.spring.model.Conexion implements ModelDao{
    
    @Autowired
-   private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
+
+   @Autowired
+    private ResultSet resultado;
+
+    public ModelDaoImp() {
+        Conectar();
+    }
 
     @Override
     public List<Modulo> obtenerModulo(String ID) {
-        TypedQuery<Modulo> query = sessionFactory.getCurrentSession().createQuery("from Modulo");
-        return query.getResultList();
+        try {
+            resultado = estam.executeQuery("select *from Modulo;");
+            ArrayList<Modulo> com = new ArrayList<>();
+            while (resultado.next()) {
+                Modulo con = new Modulo(resultado.getInt(1), resultado.getString(2), resultado.getInt(3));
+                com.add(con);
+            }
+            return com;
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public void modificarModulo(Modulo modulo) {
-        sessionFactory.getCurrentSession().update(modulo);
+//        sessionFactory.getCurrentSession().update(modulo);
     }
 
 }

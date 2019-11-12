@@ -26,16 +26,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-    @Autowired
+    
     private ModelService modelService;
     
-    @Autowired
+   
     private ModelCuadroService modelCuadroService;
     
-    @Autowired
+   
     private ModelSeccionService modelSeccionService;
     
-    @Autowired
+    
     private UsuarioService usuarioService;
 
 /**
