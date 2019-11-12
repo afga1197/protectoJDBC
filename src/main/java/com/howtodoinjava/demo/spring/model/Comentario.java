@@ -12,6 +12,10 @@ public class Comentario{
         this.Usuario_ID = Usuario_ID;
     }
 
+    public Comentario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getID() {
         return ID;
     }

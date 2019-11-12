@@ -16,6 +16,10 @@ public class Seccion {
         this.Numero = Numero;
     }
 
+    public Seccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getID() {
         return ID;
     }

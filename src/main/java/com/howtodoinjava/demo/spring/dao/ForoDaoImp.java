@@ -2,13 +2,18 @@ package com.howtodoinjava.demo.spring.dao;
 
 import com.howtodoinjava.demo.spring.model.Comentario;
 import com.howtodoinjava.demo.spring.model.Usuario;
+import com.mysql.cj.xdevapi.SessionFactory;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ForoDaoImp implements ForoDao {
+public class ForoDaoImp extends com.howtodoinjava.demo.spring.model.Conexion implements ForoDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -16,35 +21,45 @@ public class ForoDaoImp implements ForoDao {
     @Autowired
     private UsuarioDao usuarioDao;
     
+    @Autowired
+    private ResultSet resultado;
+    
+    public ForoDaoImp(){
+        Conectar();
+    }
+
     @Override
     public ArrayList<String> obtenerComentarios() {
-        String style [] = new String[3];
-        style[0]="content-box-green";
-        style[1]="content-box-blue";
-        style[2]="content-box-yellow";
-        int p=0;
-        ArrayList<String> comment = new ArrayList<>();
-        TypedQuery<Comentario> query = sessionFactory.getCurrentSession().createQuery("from Comentario order by ID asc");
-        
-        for(int x = 0 ; x < query.getResultList().size(); x++){
-            TypedQuery<Usuario> query_1 = sessionFactory.getCurrentSession().createQuery("from Usuario where Id = '"+query.getResultList().get(x).getUsuario_ID()+"' ");
-            String commentario="<div class=\"container\">\n" +
-"            <div class=\""+style[p]+   "\">\n" +
-"                <strong class=\"mbr-text align-right mb-0 mbr-fonts-style display-7\">"+query_1.getResultList().get(0).getUser()+"</strong><br><br>\n" +
-"                <p class=\"mbr-text align-right mb-0 mbr-fonts-style display-7\" style=\"text-align: justify;\" id=\"black\" >\n" +
-"                    "+query.getResultList().get(x).getComentario()+"\n" +
-"                </p>\n" +
-"            </div>\n" +
-"        </div>\n" +
-"        <br><br>";
-            p++;
-            if(p == 3){
-                p=0;
+        try {
+            String style [] = new String[3];
+            style[0]="content-box-green";
+            style[1]="content-box-blue";
+            style[2]="content-box-yellow";
+            int p = 0;
+            ArrayList<String> comment = new ArrayList<>();
+            resultado = estam.executeQuery("select comentario, user from comentario inner join usuario on comentario.Usuario_ID=usuario.Id;");
+            while (resultado.next()) {
+                String commentario = "<div class=\"container\">\n"
+                        + "            <div class=\"" + style[p] + "\">\n"
+                        + "                <strong class=\"mbr-text align-right mb-0 mbr-fonts-style display-7\">" + resultado.getString(2) + "</strong><br><br>\n"
+                        + "                <p class=\"mbr-text align-right mb-0 mbr-fonts-style display-7\" style=\"text-align: justify;\" id=\"black\" >\n"
+                        + "                    " + resultado.getString(1) + "\n"
+                        + "                </p>\n"
+                        + "            </div>\n"
+                        + "        </div>\n"
+                        + "        <br><br>";
+                p++;
+                if (p == 3) {
+                    p = 0;
+                }
+                comment.add(commentario);
+
             }
-            comment.add(commentario);
+            return comment;
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        
-        return comment;
     }
 
     @Override
@@ -65,21 +80,44 @@ public class ForoDaoImp implements ForoDao {
 
     @Override
     public String obtenerNumeroComentarios() {
-        ArrayList<String> comment = new ArrayList<>();
-        TypedQuery<Comentario> query = sessionFactory.getCurrentSession().createQuery("from Comentario");
-        return String.valueOf(query.getResultList().size());
+        String numero;
+        try {
+            resultado = estam.executeQuery("select count(*) from comentario;");
+            numero = String.valueOf(resultado.getInt(1));
+            return numero;
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public List<Comentario> obtenerSusComentarios(String usuario_ID) {
-        Usuario u = usuarioDao.obtenerUsuario();
-        TypedQuery<Comentario> query = sessionFactory.getCurrentSession().createQuery("from Comentario where Usuario_ID = '"+u.getId()+"' ");
-        return query.getResultList();  
+        try {
+            Usuario u = usuarioDao.obtenerUsuario();
+            resultado = estam.executeQuery("select from comentario where Usuario_ID="+u.getId()+";");
+            ArrayList<Comentario> com= new ArrayList<>();
+            while(resultado.next()){
+                Comentario con = new Comentario(resultado.getInt(1), resultado.getString(2), resultado.getString(3));
+                com.add(con);
+            }
+            return com;
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public Object obtenerComentarios(String id) {
-        return (Comentario)sessionFactory.getCurrentSession().get(Comentario.class, Integer.parseInt(id));
+        try {
+            resultado = estam.executeQuery("select *from comentario where ID="+id+";");
+            Comentario con = new Comentario(resultado.getInt(1), resultado.getString(2), resultado.getString(3));
+            return con;
+        } catch (SQLException ex) {
+            Logger.getLogger(ForoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
 }

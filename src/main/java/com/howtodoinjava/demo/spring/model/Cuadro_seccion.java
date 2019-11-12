@@ -22,6 +22,10 @@ public class Cuadro_seccion {
         this.Modulo_ID = Modulo_ID;
     }
 
+    public Cuadro_seccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getID() {
         return ID;
     }
